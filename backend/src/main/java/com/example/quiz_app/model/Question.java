@@ -23,11 +23,11 @@ public class Question {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "text", columnDefinition = "TEXT")
+    @Column(name = "text", columnDefinition = "TEXT", nullable = false)
     private String text;
 
     @ManyToOne
-    @JoinColumn(name = "question_id")
+    @JoinColumn(name = "question_id", nullable = false)
     private Quiz quiz;
 
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -44,7 +44,7 @@ public class Question {
     private QuestionType questionType;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "difficulty_level")
+    @Column(name = "difficulty_level", nullable = false)
     private DifficultyLevel difficultyLevel;
 
 }

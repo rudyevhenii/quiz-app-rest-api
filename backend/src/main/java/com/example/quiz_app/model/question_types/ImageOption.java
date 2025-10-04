@@ -27,7 +27,7 @@ public class ImageOption {
     @Column(name = "data", columnDefinition = "BLOB", nullable = false)
     private byte[] data;
 
-    @Column(name = "is_Correct", nullable = false)
+    @Column(name = "is_correct", nullable = false)
     private boolean isCorrect;
 
 }
