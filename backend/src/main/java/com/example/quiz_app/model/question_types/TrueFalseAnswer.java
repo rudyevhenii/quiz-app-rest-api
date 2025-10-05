@@ -17,14 +17,14 @@ public class TrueFalseAnswer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @ManyToOne
-    @JoinColumn(name = "question_id")
-    private Question question;
-
     @Column(name = "option_text", nullable = false)
     private String optionText;
 
     @Column(name = "is_correct", nullable = false)
     private boolean isCorrect;
+
+    @ManyToOne
+    @JoinColumn(name = "question_id")
+    private Question question;
 
 }

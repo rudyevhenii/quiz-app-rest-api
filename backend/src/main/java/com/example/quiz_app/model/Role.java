@@ -1,5 +1,6 @@
 package com.example.quiz_app.model;
 
+import com.example.quiz_app.enums.UserRole;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -18,10 +19,11 @@ public class Role {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "name", nullable = false)
-    private String name;
+    private UserRole name;
 
-    @ManyToMany(mappedBy = "roles")
+    @OneToMany(mappedBy = "role")
     private Set<User> users;
 
 }

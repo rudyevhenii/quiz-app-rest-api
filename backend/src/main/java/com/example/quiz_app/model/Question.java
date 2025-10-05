@@ -26,6 +26,14 @@ public class Question {
     @Column(name = "text", columnDefinition = "TEXT", nullable = false)
     private String text;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "question_type", nullable = false)
+    private QuestionType questionType;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "difficulty_level", nullable = false)
+    private DifficultyLevel difficultyLevel;
+
     @ManyToOne
     @JoinColumn(name = "question_id", nullable = false)
     private Quiz quiz;
@@ -38,13 +46,5 @@ public class Question {
 
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
     private Set<OpenTextAnswer> openTextAnswers;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "question_type", nullable = false)
-    private QuestionType questionType;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "difficulty_level", nullable = false)
-    private DifficultyLevel difficultyLevel;
 
 }

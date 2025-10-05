@@ -17,11 +17,11 @@ public class OpenTextAnswer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @Column(name = "correct_answer", nullable = false)
+    private String correctAnswer;
+
     @ManyToOne
     @JoinColumn(name = "question_id")
     private Question question;
-
-    @Column(name = "correct_answer", nullable = false)
-    private String correctAnswer;
 
 }

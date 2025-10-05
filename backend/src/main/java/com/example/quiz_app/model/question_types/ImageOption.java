@@ -17,17 +17,23 @@ public class ImageOption {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @ManyToOne
-    @JoinColumn(name = "question_id")
-    private Question question;
+    @Column(name = "url", nullable = false)
+    private String url;
 
     @Column(name = "filename", nullable = false)
     private String filename;
 
-    @Column(name = "data", columnDefinition = "BLOB", nullable = false)
-    private byte[] data;
+    @Column(name = "content_type", nullable = false)
+    private String contentType;
+
+    @Column(name = "size", nullable = false)
+    private long size;
 
     @Column(name = "is_correct", nullable = false)
     private boolean isCorrect;
+
+    @ManyToOne
+    @JoinColumn(name = "question_id")
+    private Question question;
 
 }
