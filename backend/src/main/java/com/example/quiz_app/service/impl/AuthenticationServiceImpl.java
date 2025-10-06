@@ -24,7 +24,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Duration;
 import java.util.Arrays;
-import java.util.Date;
 
 @Service
 @RequiredArgsConstructor
@@ -77,7 +76,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     @Override
     public TokensData refreshToken(Cookie[] cookies) {
         String refreshToken = Arrays.stream(cookies)
-                .filter(cookie -> cookie.getName().equals("refresh_token"))
+                .filter(cookie -> cookie.getName().equals("refresh-token"))
                 .findFirst()
                 .map(Cookie::getValue)
                 .orElseThrow(() -> new RuntimeException("Refresh token missing"));
