@@ -1,4 +1,4 @@
-package com.example.quiz_app.config;
+package com.example.quiz_app.audit;
 
 import com.example.quiz_app.model.User;
 import org.springframework.data.domain.AuditorAware;
@@ -22,4 +22,5 @@ public class ApplicationAuditorAware implements AuditorAware<Integer> {
 
         return Optional.of(user.getId());
     }
+
 }

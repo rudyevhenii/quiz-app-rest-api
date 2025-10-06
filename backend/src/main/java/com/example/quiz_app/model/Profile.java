@@ -24,10 +24,10 @@ public class Profile {
     @Column(name = "last_name", nullable = false)
     private String lastName;
 
-    @Column(name = "date_of_birth", nullable = false)
+    @Column(name = "date_of_birth")
     private LocalDate dateOfBirth;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private User user;
 
