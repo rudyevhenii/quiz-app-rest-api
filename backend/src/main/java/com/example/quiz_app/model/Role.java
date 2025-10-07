@@ -20,7 +20,7 @@ public class Role {
     private int id;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "name", nullable = false)
+    @Column(name = "name", unique = true, nullable = false)
     private UserRole name;
 
     @OneToMany(mappedBy = "role")

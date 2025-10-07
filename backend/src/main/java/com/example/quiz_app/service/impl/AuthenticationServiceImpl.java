@@ -7,6 +7,7 @@ import com.example.quiz_app.enums.UserRole;
 import com.example.quiz_app.model.Profile;
 import com.example.quiz_app.model.Role;
 import com.example.quiz_app.model.User;
+import com.example.quiz_app.repository.RoleRepository;
 import com.example.quiz_app.repository.UserRepository;
 import com.example.quiz_app.service.AuthenticationService;
 import com.example.quiz_app.service.JwtService;
@@ -35,6 +36,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     public long accessTokenExpiration;
 
     private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
     private final PasswordEncoder passwordEncoder;
@@ -47,9 +49,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 .lastName(request.getLastName())
                 .build();
 
-        Role role = Role.builder()
-                .name(UserRole.USER)
-                .build();
+        Role role = roleRepository.findByName(UserRole.USER)
+                .orElseThrow(() -> new RuntimeException("Role USER not found"));
 
         User user = User.builder()
                 .email(request.getEmail())
@@ -58,6 +59,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 .role(role)
                 .build();
 
+        profile.setUser(user);
         userRepository.save(user);
 
         return generateTokens(user);
