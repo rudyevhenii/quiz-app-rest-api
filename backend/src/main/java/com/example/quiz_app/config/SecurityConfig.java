@@ -16,13 +16,16 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @RequiredArgsConstructor
 public class SecurityConfig {
 
+    private static final String AUTH_BASE = "/api/v1/auth";
+
     private final JwtAuthFilter jwtAuthFilter;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(request ->
-                        request.requestMatchers("/api/v1/auth/**").permitAll())
+                .authorizeHttpRequests(request -> request
+                        .requestMatchers(AUTH_BASE + "/login", AUTH_BASE + "/register").permitAll()
+                        .requestMatchers(AUTH_BASE + "/refresh-token").authenticated())
                 .sessionManagement(session ->
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);

@@ -86,7 +86,7 @@ public class JwtService {
         return expiration.before(new Date());
     }
 
-    public String refreshAccessToken(String refreshToken) {
+    public String refreshAccessToken(UserDetails userDetails, String refreshToken) {
         Claims claims = extractAllClaims(refreshToken);
         if (!"REFRESH_TOKEN".equals(claims.get(TOKEN_TYPE))) {
             throw new RuntimeException("Invalid token type");
@@ -94,7 +94,8 @@ public class JwtService {
         if (isTokenExpired(refreshToken)) {
             throw new RuntimeException("Refresh Token expired");
         }
-        return extractClaim(refreshToken, Claims::getSubject);
+
+        return generateAccessToken(userDetails);
     }
 
 }

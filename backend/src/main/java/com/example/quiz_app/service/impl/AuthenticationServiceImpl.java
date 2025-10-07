@@ -81,11 +81,11 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 .map(Cookie::getValue)
                 .orElseThrow(() -> new RuntimeException("Refresh token missing"));
 
-        String accessToken = jwtService.refreshAccessToken(refreshToken);
         String email = jwtService.extractClaim(refreshToken, Claims::getSubject);
-
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("User does not exist with email: " + email));
+
+        String accessToken = jwtService.refreshAccessToken(user, refreshToken);
         String newRefreshToken = jwtService.generateRefreshToken(user);
 
         return TokensData.builder()
