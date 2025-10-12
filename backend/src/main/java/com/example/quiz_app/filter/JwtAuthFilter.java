@@ -1,6 +1,6 @@
 package com.example.quiz_app.filter;
 
-import com.example.quiz_app.service.JwtService;
+import com.example.quiz_app.service.impl.JwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

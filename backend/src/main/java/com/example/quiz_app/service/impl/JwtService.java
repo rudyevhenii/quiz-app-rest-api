@@ -1,4 +1,4 @@
-package com.example.quiz_app.service;
+package com.example.quiz_app.service.impl;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;

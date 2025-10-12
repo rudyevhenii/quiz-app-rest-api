@@ -10,7 +10,6 @@ import com.example.quiz_app.model.User;
 import com.example.quiz_app.repository.RoleRepository;
 import com.example.quiz_app.repository.UserRepository;
 import com.example.quiz_app.service.AuthenticationService;
-import com.example.quiz_app.service.JwtService;
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.http.Cookie;
 import lombok.RequiredArgsConstructor;

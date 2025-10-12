@@ -5,7 +5,7 @@ import com.example.quiz_app.dto.request.LoginRequest;
 import com.example.quiz_app.dto.request.RegisterRequest;
 import com.example.quiz_app.dto.response.AuthResponse;
 import com.example.quiz_app.service.AuthenticationService;
-import com.example.quiz_app.service.JwtService;
+import com.example.quiz_app.service.impl.JwtService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
