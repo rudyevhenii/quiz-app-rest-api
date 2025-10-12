@@ -31,4 +31,7 @@ public class Profile {
     @JoinColumn(name = "user_id")
     private User user;
 
+    @OneToOne(mappedBy = "profile", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    private ProfileAvatar profileAvatar;
+
 }

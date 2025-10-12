@@ -16,7 +16,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @RequiredArgsConstructor
 public class SecurityConfig {
 
-    private static final String AUTH_BASE = "/api/v1/auth";
+    private static final String API_BASE_PATH = "/api/v1";
 
     private final JwtAuthFilter jwtAuthFilter;
 
@@ -24,8 +24,13 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(request -> request
-                        .requestMatchers(AUTH_BASE + "/login", AUTH_BASE + "/register").permitAll()
-                        .requestMatchers(AUTH_BASE + "/refresh-token").authenticated())
+                        .requestMatchers(
+                                API_BASE_PATH + "/auth/login",
+                                API_BASE_PATH + "/auth/register"
+                        ).permitAll()
+                        .requestMatchers(API_BASE_PATH + "/auth/refresh-token").authenticated()
+                        .requestMatchers(API_BASE_PATH + "/profile/**").authenticated()
+                        .anyRequest().authenticated())
                 .sessionManagement(session ->
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
