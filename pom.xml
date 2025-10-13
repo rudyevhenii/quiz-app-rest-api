@@ -11,7 +11,7 @@
 	<groupId>com.example</groupId>
 	<artifactId>quiz-app-rest-api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>quiz-app</name>
+	<name>quiz-app-rest-api</name>
 	<description>Demo project for Spring Boot</description>
 	<url/>
 	<licenses>
