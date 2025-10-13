@@ -6,9 +6,7 @@ import java.time.LocalDate;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
-@Builder
 public class ProfileUpdateRequest {
 
     private String firstName;

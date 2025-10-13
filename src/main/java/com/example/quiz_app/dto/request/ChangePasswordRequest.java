@@ -4,9 +4,7 @@ import lombok.*;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
-@Builder
 public class ChangePasswordRequest {
 
     private String currentPassword;

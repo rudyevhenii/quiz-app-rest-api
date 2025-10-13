@@ -4,9 +4,7 @@ import lombok.*;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
-@Builder
 public class CategoryCreateRequest {
 
     private String name;
