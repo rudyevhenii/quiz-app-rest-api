@@ -31,6 +31,7 @@ public class SecurityConfig {
                         .requestMatchers(API_BASE_PATH + "/auth/refresh-token").authenticated()
                         .requestMatchers(API_BASE_PATH + "/profile/**").authenticated()
                         .requestMatchers(API_BASE_PATH + "/categories").authenticated()
+                        .requestMatchers(API_BASE_PATH + "/categories/**").hasAnyRole("MANAGER", "ADMIN")
                         .anyRequest().authenticated())
                 .sessionManagement(session ->
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

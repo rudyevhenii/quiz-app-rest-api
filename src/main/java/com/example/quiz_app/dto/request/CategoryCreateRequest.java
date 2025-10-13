@@ -1,4 +1,4 @@
-package com.example.quiz_app.dto.response;
+package com.example.quiz_app.dto.request;
 
 import lombok.*;
 
@@ -7,9 +7,8 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class CategoryResponse {
+public class CategoryCreateRequest {
 
-    private int id;
     private String name;
 
 }

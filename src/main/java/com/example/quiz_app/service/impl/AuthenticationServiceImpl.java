@@ -48,7 +48,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 .lastName(request.getLastName())
                 .build();
 
-        Role role = roleRepository.findByName(UserRole.USER)
+        Role role = roleRepository.findByName(UserRole.ROLE_USER)
                 .orElseThrow(() -> new RuntimeException("Role USER not found"));
 
         User user = User.builder()
