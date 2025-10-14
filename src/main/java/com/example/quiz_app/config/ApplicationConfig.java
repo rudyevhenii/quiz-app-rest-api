@@ -2,6 +2,7 @@ package com.example.quiz_app.config;
 
 import com.example.quiz_app.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.apache.tika.Tika;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -25,6 +26,11 @@ public class ApplicationConfig {
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config)
             throws Exception {
         return config.getAuthenticationManager();
+    }
+
+    @Bean
+    public Tika tika() {
+        return new Tika();
     }
 
 }

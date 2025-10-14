@@ -29,6 +29,7 @@ public class ProfileServiceImpl implements ProfileService {
     private final UserRepository userRepository;
     private final ProfileMapper profileMapper;
     private final AvatarMapper avatarMapper;
+    private final ImageValidationService imageValidationService;
 
     @Override
     public ProfileResponse getProfileByUserEmail(String email) {
@@ -60,8 +61,13 @@ public class ProfileServiceImpl implements ProfileService {
     @Override
     @Transactional
     public ProfileResponse uploadProfileImage(String email, MultipartFile imageFile) {
+        imageValidationService.validateImage(imageFile);
+
         Profile profile = getProfileByEmail(email);
 
+        if (profile.getProfileAvatar() != null) {
+            profile.setProfileAvatar(null);
+        }
         try {
             byte[] bytes = imageFile.getBytes();
             String contentType = imageFile.getContentType();
