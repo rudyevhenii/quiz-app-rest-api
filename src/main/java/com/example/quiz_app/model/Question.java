@@ -2,7 +2,6 @@ package com.example.quiz_app.model;
 
 import com.example.quiz_app.enums.DifficultyLevel;
 import com.example.quiz_app.enums.QuestionType;
-import com.example.quiz_app.model.question_types.ImageOption;
 import com.example.quiz_app.model.question_types.MultipleChoiceOption;
 import com.example.quiz_app.model.question_types.OpenTextAnswer;
 import jakarta.persistence.*;
@@ -40,9 +39,6 @@ public class Question {
 
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<MultipleChoiceOption> multipleChoiceOptions;
-
-    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
-    private Set<ImageOption> imageOptions;
 
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
     private Set<OpenTextAnswer> openTextAnswers;
