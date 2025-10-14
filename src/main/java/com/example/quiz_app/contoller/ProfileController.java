@@ -5,6 +5,7 @@ import com.example.quiz_app.dto.request.ProfileUpdateRequest;
 import com.example.quiz_app.dto.response.AvatarResponse;
 import com.example.quiz_app.dto.response.ProfileResponse;
 import com.example.quiz_app.service.ProfileService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.CacheControl;
 import org.springframework.http.HttpStatus;
@@ -33,7 +34,7 @@ public class ProfileController {
 
     @PatchMapping("/update-profile")
     public ResponseEntity<ProfileResponse> updateProfile(Authentication authentication,
-                                                         @RequestBody ProfileUpdateRequest request) {
+                                                         @Valid @RequestBody ProfileUpdateRequest request) {
         String email = authentication.getName();
         ProfileResponse response = profileService.updateProfile(email, request);
 
@@ -73,7 +74,7 @@ public class ProfileController {
 
     @PostMapping("/change-password")
     public ResponseEntity<Void> changeUserPassword(Authentication authentication,
-                                                   @RequestBody ChangePasswordRequest request) {
+                                                   @Valid @RequestBody ChangePasswordRequest request) {
         String email = authentication.getName();
         profileService.changePassword(email, request);
 

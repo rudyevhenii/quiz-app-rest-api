@@ -9,6 +9,7 @@ import com.example.quiz_app.service.impl.JwtService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
@@ -34,7 +35,7 @@ public class AuthenticationController {
     private long refreshTokenExpiration;
 
     @PostMapping("/register")
-    public ResponseEntity<AuthResponse> register(@RequestBody RegisterRequest registerRequest,
+    public ResponseEntity<AuthResponse> register(@Valid @RequestBody RegisterRequest registerRequest,
                                                  HttpServletResponse response) {
         TokensData tokensData = authenticationService.register(registerRequest);
         addRefreshTokenCookie(tokensData, response);
@@ -48,7 +49,7 @@ public class AuthenticationController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest loginRequest,
+    public ResponseEntity<AuthResponse> login(@Valid @RequestBody LoginRequest loginRequest,
                                               HttpServletResponse response) {
         TokensData tokensData = authenticationService.login(loginRequest);
         addRefreshTokenCookie(tokensData, response);

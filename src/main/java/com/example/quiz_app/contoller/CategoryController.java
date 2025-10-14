@@ -4,6 +4,7 @@ import com.example.quiz_app.dto.request.CategoryCreateRequest;
 import com.example.quiz_app.dto.request.CategoryUpdateRequest;
 import com.example.quiz_app.dto.response.CategoryResponse;
 import com.example.quiz_app.service.CategoryService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +28,7 @@ public class CategoryController {
 
     @PostMapping("/new-category")
     public ResponseEntity<CategoryResponse> createNewCategory(
-            @RequestBody CategoryCreateRequest request) {
+            @Valid @RequestBody CategoryCreateRequest request) {
         CategoryResponse response = categoryService.createCategory(request);
 
         return ResponseEntity.status(HttpStatus.CREATED)
@@ -43,7 +44,7 @@ public class CategoryController {
 
     @PatchMapping("/{id}")
     public ResponseEntity<CategoryResponse> updateCategory(@PathVariable int id,
-                                                           @RequestBody CategoryUpdateRequest request) {
+                                                           @Valid @RequestBody CategoryUpdateRequest request) {
         CategoryResponse response = categoryService.updateCategory(id, request);
 
         return ResponseEntity.ok(response);
