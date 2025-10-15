@@ -24,4 +24,20 @@ public class OpenTextAnswer {
     @JoinColumn(name = "question_id")
     private Question question;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        OpenTextAnswer that = (OpenTextAnswer) o;
+        if (id == 0) return false;
+
+        return getId() == that.getId();
+    }
+
+    @Override
+    public int hashCode() {
+        return id != 0 ? Integer.valueOf(id).hashCode() : getClass().hashCode();
+    }
+
 }

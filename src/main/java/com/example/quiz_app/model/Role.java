@@ -13,14 +13,16 @@ import java.util.Set;
 @Builder
 @Entity
 @Table(name = "roles")
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Role {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Enumerated(EnumType.STRING)
     @Column(name = "name", unique = true, nullable = false)
+    @Enumerated(EnumType.STRING)
+    @EqualsAndHashCode.Include
     private UserRole name;
 
     @OneToMany(mappedBy = "role")

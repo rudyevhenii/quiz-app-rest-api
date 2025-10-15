@@ -17,6 +17,7 @@ import java.util.Set;
 @Builder
 @Entity
 @Table(name = "users")
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class User implements UserDetails {
 
     @Id
@@ -24,6 +25,7 @@ public class User implements UserDetails {
     private int id;
 
     @Column(name = "email", unique = true, nullable = false)
+    @EqualsAndHashCode.Include
     private String email;
 
     @Column(name = "password", nullable = false)

@@ -34,4 +34,20 @@ public class Profile {
     @OneToOne(mappedBy = "profile", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     private ProfileAvatar profileAvatar;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Profile profile = (Profile) o;
+        if (id == 0) return false;
+
+        return getId() == profile.getId();
+    }
+
+    @Override
+    public int hashCode() {
+        return id != 0 ? Integer.valueOf(id).hashCode() : getClass().hashCode();
+    }
+
 }

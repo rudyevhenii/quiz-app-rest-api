@@ -1,6 +1,5 @@
 package com.example.quiz_app.model;
 
-import com.example.quiz_app.enums.DifficultyLevel;
 import com.example.quiz_app.enums.QuestionType;
 import com.example.quiz_app.model.question_types.MultipleChoiceOption;
 import com.example.quiz_app.model.question_types.OpenTextAnswer;
@@ -25,22 +24,34 @@ public class Question {
     @Column(name = "text", columnDefinition = "TEXT", nullable = false)
     private String text;
 
-    @Enumerated(EnumType.STRING)
     @Column(name = "question_type", nullable = false)
-    private QuestionType questionType;
-
     @Enumerated(EnumType.STRING)
-    @Column(name = "difficulty_level", nullable = false)
-    private DifficultyLevel difficultyLevel;
-
-    @ManyToOne
-    @JoinColumn(name = "question_id", nullable = false)
-    private Quiz quiz;
+    private QuestionType questionType;
 
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<MultipleChoiceOption> multipleChoiceOptions;
 
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
     private Set<OpenTextAnswer> openTextAnswers;
+
+    @ManyToOne
+    @JoinColumn(name = "quiz_id", nullable = false)
+    private Quiz quiz;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Question question = (Question) o;
+        if (id == 0) return false;
+
+        return getId() == question.getId();
+    }
+
+    @Override
+    public int hashCode() {
+        return id != 0 ? Integer.valueOf(id).hashCode() : getClass().hashCode();
+    }
 
 }

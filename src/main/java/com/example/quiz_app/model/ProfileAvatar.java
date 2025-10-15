@@ -27,4 +27,19 @@ public class ProfileAvatar {
     @JoinColumn(name = "profile_id")
     private Profile profile;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ProfileAvatar that = (ProfileAvatar) o;
+        if (id == 0) return false;
+
+        return getId() == that.getId();
+    }
+
+    @Override
+    public int hashCode() {
+        return id != 0 ? Integer.valueOf(id).hashCode() : getClass().hashCode();
+    }
 }
