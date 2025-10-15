@@ -31,7 +31,7 @@ public class Question {
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<MultipleChoiceOption> multipleChoiceOptions;
 
-    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<OpenTextAnswer> openTextAnswers;
 
     @ManyToOne
