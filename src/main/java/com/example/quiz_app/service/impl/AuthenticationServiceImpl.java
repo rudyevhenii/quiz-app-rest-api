@@ -1,8 +1,8 @@
 package com.example.quiz_app.service.impl;
 
 import com.example.quiz_app.dto.TokensData;
-import com.example.quiz_app.dto.request.LoginRequest;
-import com.example.quiz_app.dto.request.RegisterRequest;
+import com.example.quiz_app.dto.auth.LoginRequest;
+import com.example.quiz_app.dto.auth.RegisterRequest;
 import com.example.quiz_app.enums.UserRole;
 import com.example.quiz_app.model.Profile;
 import com.example.quiz_app.model.Role;

@@ -1,6 +1,5 @@
-package com.example.quiz_app.model.question_types;
+package com.example.quiz_app.model;
 
-import com.example.quiz_app.model.Question;
 import jakarta.persistence.*;
 import lombok.*;
 

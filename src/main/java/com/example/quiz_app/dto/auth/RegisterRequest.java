@@ -1,4 +1,4 @@
-package com.example.quiz_app.dto.request;
+package com.example.quiz_app.dto.auth;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

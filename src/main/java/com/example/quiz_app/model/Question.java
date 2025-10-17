@@ -1,11 +1,9 @@
 package com.example.quiz_app.model;
 
-import com.example.quiz_app.enums.QuestionType;
-import com.example.quiz_app.model.question_types.MultipleChoiceOption;
-import com.example.quiz_app.model.question_types.OpenTextAnswer;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Getter
@@ -24,15 +22,9 @@ public class Question {
     @Column(name = "text", columnDefinition = "TEXT", nullable = false)
     private String text;
 
-    @Column(name = "question_type", nullable = false)
-    @Enumerated(EnumType.STRING)
-    private QuestionType questionType;
 
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<MultipleChoiceOption> multipleChoiceOptions;
-
-    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<OpenTextAnswer> openTextAnswers;
+    private Set<MultipleChoiceOption> multipleChoiceOptions = new HashSet<>();
 
     @ManyToOne
     @JoinColumn(name = "quiz_id", nullable = false)

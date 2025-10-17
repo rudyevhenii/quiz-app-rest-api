@@ -1,9 +1,9 @@
 package com.example.quiz_app.service.impl;
 
-import com.example.quiz_app.dto.request.ChangePasswordRequest;
-import com.example.quiz_app.dto.request.ProfileUpdateRequest;
-import com.example.quiz_app.dto.response.AvatarResponse;
-import com.example.quiz_app.dto.response.ProfileResponse;
+import com.example.quiz_app.dto.profile.AvatarResponse;
+import com.example.quiz_app.dto.profile.ChangePasswordRequest;
+import com.example.quiz_app.dto.profile.ProfileResponse;
+import com.example.quiz_app.dto.profile.ProfileUpdateRequest;
 import com.example.quiz_app.mapper.AvatarMapper;
 import com.example.quiz_app.mapper.ProfileMapper;
 import com.example.quiz_app.model.Profile;

@@ -1,6 +1,6 @@
 package com.example.quiz_app.mapper;
 
-import com.example.quiz_app.dto.response.ProfileResponse;
+import com.example.quiz_app.dto.profile.ProfileResponse;
 import com.example.quiz_app.model.Profile;
 import org.springframework.stereotype.Component;
 

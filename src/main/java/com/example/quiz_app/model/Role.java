@@ -4,6 +4,7 @@ import com.example.quiz_app.enums.UserRole;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Getter
@@ -26,6 +27,6 @@ public class Role {
     private UserRole name;
 
     @OneToMany(mappedBy = "role")
-    private Set<User> users;
+    private Set<User> users = new HashSet<>();
 
 }

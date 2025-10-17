@@ -1,12 +1,16 @@
 package com.example.quiz_app.contoller;
 
-import com.example.quiz_app.dto.request.ChangePasswordRequest;
-import com.example.quiz_app.dto.request.ProfileUpdateRequest;
-import com.example.quiz_app.dto.response.AvatarResponse;
-import com.example.quiz_app.dto.response.ProfileResponse;
+import com.example.quiz_app.dto.profile.AvatarResponse;
+import com.example.quiz_app.dto.profile.ChangePasswordRequest;
+import com.example.quiz_app.dto.profile.ProfileResponse;
+import com.example.quiz_app.dto.profile.ProfileUpdateRequest;
+import com.example.quiz_app.dto.quiz.view.QuizHistoryResponse;
 import com.example.quiz_app.service.ProfileService;
+import com.example.quiz_app.service.QuizService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.CacheControl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -23,6 +27,7 @@ import java.util.concurrent.TimeUnit;
 public class ProfileController {
 
     private final ProfileService profileService;
+    private final QuizService quizService;
 
     @GetMapping
     public ResponseEntity<ProfileResponse> getProfile(Authentication authentication) {
@@ -33,8 +38,10 @@ public class ProfileController {
     }
 
     @PatchMapping("/update-profile")
-    public ResponseEntity<ProfileResponse> updateProfile(Authentication authentication,
-                                                         @Valid @RequestBody ProfileUpdateRequest request) {
+    public ResponseEntity<ProfileResponse> updateProfile(
+            Authentication authentication,
+            @Valid @RequestBody ProfileUpdateRequest request
+    ) {
         String email = authentication.getName();
         ProfileResponse response = profileService.updateProfile(email, request);
 
@@ -42,8 +49,10 @@ public class ProfileController {
     }
 
     @PostMapping("/upload-image")
-    public ResponseEntity<ProfileResponse> uploadProfileImage(Authentication authentication,
-                                                              @RequestParam("image") MultipartFile multipartFile) {
+    public ResponseEntity<ProfileResponse> uploadProfileImage(
+            Authentication authentication,
+            @RequestParam("image") MultipartFile multipartFile
+    ) {
         String email = authentication.getName();
         ProfileResponse response = profileService.uploadProfileImage(email, multipartFile);
 
@@ -73,13 +82,26 @@ public class ProfileController {
     }
 
     @PostMapping("/change-password")
-    public ResponseEntity<Void> changeUserPassword(Authentication authentication,
-                                                   @Valid @RequestBody ChangePasswordRequest request) {
+    public ResponseEntity<Void> changeUserPassword(
+            Authentication authentication,
+            @Valid @RequestBody ChangePasswordRequest request
+    ) {
         String email = authentication.getName();
         profileService.changePassword(email, request);
 
         return ResponseEntity.ok()
                 .build();
+    }
+
+    @GetMapping("/quiz-history")
+    public ResponseEntity<Page<QuizHistoryResponse>> getUserQuizHistory(
+            Authentication authentication,
+            Pageable pageable
+    ) {
+        String email = authentication.getName();
+        Page<QuizHistoryResponse> responsePage = quizService.getUserQuizHistory(email, pageable);
+
+        return ResponseEntity.ok(responsePage);
     }
 
 }

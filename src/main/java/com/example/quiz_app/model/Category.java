@@ -3,6 +3,7 @@ package com.example.quiz_app.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Getter
@@ -22,7 +23,7 @@ public class Category {
     private String name;
 
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
-    private Set<Quiz> quizzes;
+    private Set<Quiz> quizzes = new HashSet<>();
 
     @Override
     public boolean equals(Object o) {

@@ -1,8 +1,8 @@
 package com.example.quiz_app.contoller;
 
-import com.example.quiz_app.dto.request.CategoryCreateRequest;
-import com.example.quiz_app.dto.request.CategoryUpdateRequest;
-import com.example.quiz_app.dto.response.CategoryResponse;
+import com.example.quiz_app.dto.category.CategoryCreateRequest;
+import com.example.quiz_app.dto.category.CategoryResponse;
+import com.example.quiz_app.dto.category.CategoryUpdateRequest;
 import com.example.quiz_app.service.CategoryService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -26,9 +26,10 @@ public class CategoryController {
         return ResponseEntity.ok(categories);
     }
 
-    @PostMapping("/new-category")
+    @PostMapping
     public ResponseEntity<CategoryResponse> createNewCategory(
-            @Valid @RequestBody CategoryCreateRequest request) {
+            @Valid @RequestBody CategoryCreateRequest request
+    ) {
         CategoryResponse response = categoryService.createCategory(request);
 
         return ResponseEntity.status(HttpStatus.CREATED)
@@ -43,8 +44,10 @@ public class CategoryController {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<CategoryResponse> updateCategory(@PathVariable int id,
-                                                           @Valid @RequestBody CategoryUpdateRequest request) {
+    public ResponseEntity<CategoryResponse> updateCategory(
+            @PathVariable int id,
+            @Valid @RequestBody CategoryUpdateRequest request
+    ) {
         CategoryResponse response = categoryService.updateCategory(id, request);
 
         return ResponseEntity.ok(response);

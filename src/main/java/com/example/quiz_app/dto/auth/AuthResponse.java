@@ -1,4 +1,4 @@
-package com.example.quiz_app.dto.response;
+package com.example.quiz_app.dto.auth;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -1,4 +1,4 @@
-package com.example.quiz_app.dto.request;
+package com.example.quiz_app.dto.profile;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Past;

@@ -1,9 +1,9 @@
 package com.example.quiz_app.contoller;
 
 import com.example.quiz_app.dto.TokensData;
-import com.example.quiz_app.dto.request.LoginRequest;
-import com.example.quiz_app.dto.request.RegisterRequest;
-import com.example.quiz_app.dto.response.AuthResponse;
+import com.example.quiz_app.dto.auth.AuthResponse;
+import com.example.quiz_app.dto.auth.LoginRequest;
+import com.example.quiz_app.dto.auth.RegisterRequest;
 import com.example.quiz_app.service.AuthenticationService;
 import com.example.quiz_app.service.impl.JwtService;
 import jakarta.servlet.http.Cookie;
@@ -35,8 +35,10 @@ public class AuthenticationController {
     private long refreshTokenExpiration;
 
     @PostMapping("/register")
-    public ResponseEntity<AuthResponse> register(@Valid @RequestBody RegisterRequest registerRequest,
-                                                 HttpServletResponse response) {
+    public ResponseEntity<AuthResponse> register(
+            @Valid @RequestBody RegisterRequest registerRequest,
+            HttpServletResponse response
+    ) {
         TokensData tokensData = authenticationService.register(registerRequest);
         addRefreshTokenCookie(tokensData, response);
 
@@ -49,8 +51,10 @@ public class AuthenticationController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<AuthResponse> login(@Valid @RequestBody LoginRequest loginRequest,
-                                              HttpServletResponse response) {
+    public ResponseEntity<AuthResponse> login(
+            @Valid @RequestBody LoginRequest loginRequest,
+            HttpServletResponse response
+    ) {
         TokensData tokensData = authenticationService.login(loginRequest);
         addRefreshTokenCookie(tokensData, response);
 
@@ -63,8 +67,10 @@ public class AuthenticationController {
     }
 
     @PostMapping("/refresh-token")
-    public ResponseEntity<AuthResponse> refreshToken(HttpServletRequest request,
-                                                     HttpServletResponse response) {
+    public ResponseEntity<AuthResponse> refreshToken(
+            HttpServletRequest request,
+            HttpServletResponse response
+    ) {
         Cookie[] cookies = request.getCookies();
         TokensData tokensData = authenticationService.refreshToken(cookies);
 

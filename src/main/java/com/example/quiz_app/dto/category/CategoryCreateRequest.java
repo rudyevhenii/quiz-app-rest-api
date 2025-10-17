@@ -1,4 +1,4 @@
-package com.example.quiz_app.dto.request;
+package com.example.quiz_app.dto.category;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;

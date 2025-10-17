@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Getter
@@ -41,8 +42,11 @@ public class Quiz extends BaseEntity {
     @JoinColumn(name = "category_id")
     private Category category;
 
+    @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Question> questions = new HashSet<>();
+
     @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL)
-    private Set<Question> questions;
+    private Set<QuizHistory> quizHistories = new HashSet<>();
 
     @Override
     public boolean equals(Object o) {

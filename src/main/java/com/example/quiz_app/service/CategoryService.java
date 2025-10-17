@@ -1,8 +1,8 @@
 package com.example.quiz_app.service;
 
-import com.example.quiz_app.dto.request.CategoryCreateRequest;
-import com.example.quiz_app.dto.request.CategoryUpdateRequest;
-import com.example.quiz_app.dto.response.CategoryResponse;
+import com.example.quiz_app.dto.category.CategoryCreateRequest;
+import com.example.quiz_app.dto.category.CategoryResponse;
+import com.example.quiz_app.dto.category.CategoryUpdateRequest;
 
 import java.util.List;
 

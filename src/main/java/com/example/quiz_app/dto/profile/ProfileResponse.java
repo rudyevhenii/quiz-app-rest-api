@@ -1,4 +1,4 @@
-package com.example.quiz_app.dto.response;
+package com.example.quiz_app.dto.profile;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,6 +11,7 @@ import java.time.LocalDate;
 @Builder
 public class ProfileResponse {
 
+    private int id;
     private String firstName;
     private String lastName;
     private LocalDate dateOfBirth;
