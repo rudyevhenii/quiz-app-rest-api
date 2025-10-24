@@ -5,6 +5,7 @@ import com.example.quiz_app.dto.quiz.view.QuizResultResponse;
 import com.example.quiz_app.dto.quiz.view.QuizSubmissionRequest;
 import com.example.quiz_app.enums.DifficultyLevel;
 import com.example.quiz_app.service.QuizService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -41,7 +42,7 @@ public class QuizController {
     public ResponseEntity<QuizResultResponse> submitQuiz(
             Authentication authentication,
             @PathVariable int quizId,
-            @RequestBody QuizSubmissionRequest request
+            @Valid @RequestBody QuizSubmissionRequest request
     ) {
         String email = authentication.getName();
         QuizResultResponse response = quizService.submitQuiz(quizId, email, request);

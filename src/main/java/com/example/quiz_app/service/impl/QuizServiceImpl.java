@@ -126,8 +126,8 @@ public class QuizServiceImpl implements QuizService {
         User user = getUserById(email);
 
         Map<Integer, Set<Integer>> userAnswers = answersRequest.getAnswers().stream()
-                        .collect(Collectors.toMap(QuestionSubmissionRequest::getId,
-                                QuestionSubmissionRequest::getSelectedOptionIds));
+                .collect(Collectors.toMap(QuestionSubmissionRequest::getId,
+                        QuestionSubmissionRequest::getSelectedOptionIds));
 
         List<QuestionResultResponse> detailedQuestionResponse = new ArrayList<>();
         int score = 0;

@@ -3,6 +3,7 @@ package com.example.quiz_app.contoller;
 import com.example.quiz_app.dto.quiz.management.QuizManagementRequest;
 import com.example.quiz_app.dto.quiz.management.QuizManagementResponse;
 import com.example.quiz_app.service.QuizService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,7 +22,7 @@ public class QuizManagementController {
     @PostMapping
     public ResponseEntity<QuizManagementResponse> createQuiz(
             Authentication authentication,
-            @RequestBody QuizManagementRequest quizRequest
+            @Valid @RequestBody QuizManagementRequest quizRequest
     ) {
         String email = authentication.getName();
         QuizManagementResponse response = quizService.createQuiz(email, quizRequest);
@@ -47,7 +48,7 @@ public class QuizManagementController {
     @PutMapping("/{quizId}")
     public ResponseEntity<QuizManagementResponse> updateQuiz(
             @PathVariable int quizId,
-            @RequestBody QuizManagementRequest quizRequest
+            @Valid @RequestBody QuizManagementRequest quizRequest
     ) {
         QuizManagementResponse response = quizService.updateQuiz(quizId, quizRequest);
 
