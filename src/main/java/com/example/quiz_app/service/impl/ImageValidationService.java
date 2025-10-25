@@ -1,5 +1,6 @@
 package com.example.quiz_app.service.impl;
 
+import com.example.quiz_app.excpetion.InvalidFileException;
 import lombok.RequiredArgsConstructor;
 import org.apache.tika.Tika;
 import org.springframework.stereotype.Service;
@@ -23,18 +24,18 @@ public class ImageValidationService {
 
     public void validateImage(MultipartFile file) {
         if (file == null || file.isEmpty()) {
-            throw new RuntimeException("File is empty or null");
+            throw new InvalidFileException("File is empty or null");
         }
 
         try {
             String detectedType = tika.detect(file.getInputStream());
 
             if (!ALLOWED_MIME_TYPES.contains(detectedType)) {
-                throw new RuntimeException("Invalid file type. " +
+                throw new InvalidFileException("Invalid file type. " +
                         "Only JPEG, PNG, GIF, WEBP images are allowed. Detected: " + detectedType);
             }
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new InvalidFileException("Could not read file for validation");
         }
     }
 

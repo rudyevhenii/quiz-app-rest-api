@@ -1,5 +1,6 @@
 package com.example.quiz_app.service.impl;
 
+import com.example.quiz_app.excpetion.InvalidJwtTokenException;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
@@ -67,7 +68,7 @@ public class JwtService {
                     .parseSignedClaims(token)
                     .getPayload();
         } catch (JwtException e) {
-            throw new RuntimeException("Invalid JWT token, " + e);
+            throw new InvalidJwtTokenException("Invalid JWT token, " + e);
         }
     }
 
@@ -89,10 +90,10 @@ public class JwtService {
     public String refreshAccessToken(UserDetails userDetails, String refreshToken) {
         Claims claims = extractAllClaims(refreshToken);
         if (!"REFRESH_TOKEN".equals(claims.get(TOKEN_TYPE))) {
-            throw new RuntimeException("Invalid token type");
+            throw new InvalidJwtTokenException("Invalid token type");
         }
         if (isTokenExpired(refreshToken)) {
-            throw new RuntimeException("Refresh Token expired");
+            throw new InvalidJwtTokenException("Refresh Token expired");
         }
 
         return generateAccessToken(userDetails);

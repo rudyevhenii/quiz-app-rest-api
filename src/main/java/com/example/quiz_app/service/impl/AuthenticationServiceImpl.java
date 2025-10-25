@@ -4,6 +4,7 @@ import com.example.quiz_app.dto.TokensData;
 import com.example.quiz_app.dto.auth.LoginRequest;
 import com.example.quiz_app.dto.auth.RegisterRequest;
 import com.example.quiz_app.enums.UserRole;
+import com.example.quiz_app.excpetion.ResourceNotFoundException;
 import com.example.quiz_app.model.Profile;
 import com.example.quiz_app.model.Role;
 import com.example.quiz_app.model.User;
@@ -49,7 +50,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 .build();
 
         Role role = roleRepository.findByName(UserRole.ROLE_USER)
-                .orElseThrow(() -> new RuntimeException("Role USER not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Role USER not found"));
 
         User user = User.builder()
                 .email(request.getEmail())
@@ -80,7 +81,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 .filter(cookie -> cookie.getName().equals("refresh-token"))
                 .findFirst()
                 .map(Cookie::getValue)
-                .orElseThrow(() -> new RuntimeException("Refresh token missing"));
+                .orElseThrow(() -> new ResourceNotFoundException("Refresh token missing"));
 
         String email = jwtService.extractClaim(refreshToken, Claims::getSubject);
         User user = userRepository.findByEmail(email)

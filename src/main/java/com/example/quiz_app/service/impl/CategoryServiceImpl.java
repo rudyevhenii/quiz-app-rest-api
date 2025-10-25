@@ -3,6 +3,8 @@ package com.example.quiz_app.service.impl;
 import com.example.quiz_app.dto.category.CategoryCreateRequest;
 import com.example.quiz_app.dto.category.CategoryResponse;
 import com.example.quiz_app.dto.category.CategoryUpdateRequest;
+import com.example.quiz_app.excpetion.ResourceAlreadyExistsException;
+import com.example.quiz_app.excpetion.ResourceNotFoundException;
 import com.example.quiz_app.mapper.CategoryMapper;
 import com.example.quiz_app.model.Category;
 import com.example.quiz_app.repository.CategoryRepository;
@@ -23,7 +25,7 @@ public class CategoryServiceImpl implements CategoryService {
     public CategoryResponse createCategory(CategoryCreateRequest request) {
         String name = request.getName();
         if (categoryRepository.existsByNameIgnoreCase(name)) {
-            throw new RuntimeException("Category with name '" + name + "' already exists.");
+            throw new ResourceAlreadyExistsException("Category with name '" + name + "' already exists.");
         }
         Category newCategory = new Category();
         newCategory.setName(name);
@@ -52,9 +54,6 @@ public class CategoryServiceImpl implements CategoryService {
         Category category = getCategoryById(id);
 
         String name = request.getName();
-        if (name == null) {
-            throw new RuntimeException("Category name has null value.");
-        }
         category.setName(name);
         categoryRepository.save(category);
 
@@ -70,7 +69,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     private Category getCategoryById(int id) {
         return categoryRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Category not found with id: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Category not found with id: " + id));
     }
 
 }

@@ -4,6 +4,7 @@ import com.example.quiz_app.dto.quiz.management.QuizManagementRequest;
 import com.example.quiz_app.dto.quiz.management.QuizManagementResponse;
 import com.example.quiz_app.dto.quiz.view.*;
 import com.example.quiz_app.enums.DifficultyLevel;
+import com.example.quiz_app.excpetion.ResourceNotFoundException;
 import com.example.quiz_app.mapper.QuizHistoryMapper;
 import com.example.quiz_app.mapper.QuizMapper;
 import com.example.quiz_app.model.*;
@@ -212,17 +213,17 @@ public class QuizServiceImpl implements QuizService {
 
     private User getUserById(String email) {
         return userRepository.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("User is not found with email: " + email));
+                .orElseThrow(() -> new ResourceNotFoundException("User is not found with email: " + email));
     }
 
     private Category getCategoryById(int categoryId) {
         return categoryRepository.findById(categoryId)
-                .orElseThrow(() -> new RuntimeException("Category is not found with id: " + categoryId));
+                .orElseThrow(() -> new ResourceNotFoundException("Category is not found with id: " + categoryId));
     }
 
     private Quiz getQuizById(int quizId) {
         return quizRepository.findById(quizId)
-                .orElseThrow(() -> new RuntimeException("Quiz is not found with id: " + quizId));
+                .orElseThrow(() -> new ResourceNotFoundException("Quiz is not found with id: " + quizId));
     }
 
 }

@@ -4,6 +4,9 @@ import com.example.quiz_app.dto.profile.AvatarResponse;
 import com.example.quiz_app.dto.profile.ChangePasswordRequest;
 import com.example.quiz_app.dto.profile.ProfileResponse;
 import com.example.quiz_app.dto.profile.ProfileUpdateRequest;
+import com.example.quiz_app.excpetion.InvalidFileException;
+import com.example.quiz_app.excpetion.InvalidPasswordException;
+import com.example.quiz_app.excpetion.ResourceNotFoundException;
 import com.example.quiz_app.mapper.AvatarMapper;
 import com.example.quiz_app.mapper.ProfileMapper;
 import com.example.quiz_app.model.Profile;
@@ -82,7 +85,7 @@ public class ProfileServiceImpl implements ProfileService {
 
             profileRepository.save(profile);
         } catch (IOException e) {
-            throw new RuntimeException("Could not read file: " + imageFile.getOriginalFilename());
+            throw new InvalidFileException("Could not read file: " + imageFile.getOriginalFilename());
         }
 
         return profileMapper.toResponse(profile);
@@ -94,7 +97,7 @@ public class ProfileServiceImpl implements ProfileService {
         ProfileAvatar profileAvatar = profile.getProfileAvatar();
 
         if (profileAvatar == null) {
-            throw new RuntimeException("Avatar not found for user: " + email);
+            throw new ResourceNotFoundException("Avatar not found for user: " + email);
         }
         return avatarMapper.toResponse(profileAvatar);
     }
@@ -116,13 +119,13 @@ public class ProfileServiceImpl implements ProfileService {
         User user = profile.getUser();
 
         if (!passwordEncoder.matches(request.getCurrentPassword(), user.getPassword())) {
-            throw new RuntimeException("Current password does not match.");
+            throw new InvalidPasswordException("Current password does not match.");
         }
         String newPassword = request.getNewPassword();
         String confirmPassword = request.getConfirmPassword();
 
         if (!newPassword.equals(confirmPassword)) {
-            throw new RuntimeException("New password and confirmation password do not match.");
+            throw new InvalidPasswordException("New password and confirmation password do not match.");
         }
         user.setPassword(passwordEncoder.encode(newPassword));
 
@@ -131,7 +134,7 @@ public class ProfileServiceImpl implements ProfileService {
 
     private Profile getProfileByEmail(String email) {
         return profileRepository.findByUserEmail(email)
-                .orElseThrow(() -> new RuntimeException("User profile is not found with email: " + email));
+                .orElseThrow(() -> new ResourceNotFoundException("User profile is not found with email: " + email));
     }
 
 }

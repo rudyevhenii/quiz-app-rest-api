@@ -11,7 +11,6 @@ import java.time.LocalDate;
 @Builder
 public class ProfileResponse {
 
-    private int id;
     private String firstName;
     private String lastName;
     private LocalDate dateOfBirth;
