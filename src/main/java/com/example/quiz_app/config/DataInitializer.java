@@ -6,7 +6,6 @@ import com.example.quiz_app.model.Profile;
 import com.example.quiz_app.model.Role;
 import com.example.quiz_app.model.User;
 import com.example.quiz_app.repository.CategoryRepository;
-import com.example.quiz_app.repository.ProfileRepository;
 import com.example.quiz_app.repository.RoleRepository;
 import com.example.quiz_app.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
